@@ -13,4 +13,5 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	public List<User> findByFirstName(String firstName);
 	public List<User> findByIsAdmin(boolean isAdmin);
 	public User findByEmail (String email);
+
 }

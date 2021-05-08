@@ -3,6 +3,9 @@ package com.sportyShoes.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session.Cookie;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +27,8 @@ public class UserCrudController {
 	private UserCrudService userCrudService;
 	
 	@PostMapping("/createUser")
-	public User createUser(@RequestBody User user) {
-		return userCrudService.createUser(user);
+	public ResponseEntity createUser(@RequestBody User user) {
+		return new ResponseEntity(userCrudService.createUser(user), HttpStatus.OK);
 	}
 
 	@PutMapping("/user")
@@ -34,7 +37,7 @@ public class UserCrudController {
 	}
 
 	@GetMapping("/user/{userId}")
-	public User getUserById(@PathVariable int userId) {
+	public User getUserById(@PathVariable (value="userId") int userId) {
 		return userCrudService.getUserById(userId);
 	}
 
@@ -43,8 +46,23 @@ public class UserCrudController {
 		userCrudService.deleteUserById(userId);
 	}
 	@GetMapping("/userList")
-	public List<User> userList() {
-		return userCrudService.userList();
+	public ResponseEntity userList() {
+		return new ResponseEntity(userCrudService.userList(), HttpStatus.OK);
 	}
+	
+//	@GetMapping(value = "/login/{userName}/{password}")
+//	public boolean isExistingUser(@PathVariable (value="username") String userName, @PathVariable (value="password") String password) {
+//		for(User user :userList()) {
+//			if(userName.equals(user.getUserName())) {
+//				if(user.getPassword().equals(password)){
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
+	
+
+
 	
 }

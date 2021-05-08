@@ -31,4 +31,22 @@ public class User {
 	private Boolean isAdmin;
 	@OneToMany
 	private List<Purchase> listOfPurchases;
+	
+	
+	private static void userInitData() {
+		new User( "david", "password", "David","david@gmail.com", false,null);		
+
+	}
+
+
+	public User(String userName, String password, String firstName, String email, Boolean isAdmin,
+			List<Purchase> listOfPurchases) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.email = email;
+		this.isAdmin = isAdmin;
+		this.listOfPurchases = listOfPurchases;
+	}
 }

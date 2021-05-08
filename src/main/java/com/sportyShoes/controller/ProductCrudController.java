@@ -37,13 +37,13 @@ public class ProductCrudController {
 	}
 
 	@GetMapping("/product/{productId}")
-	public Product getProductById(@PathVariable int productId) {
+	public Product getProductById(@PathVariable (value="productId") int productId) {
 		// TODO Auto-generated method stub
 		return productCrudService.getProductById(productId);
 	}
 
 	@DeleteMapping("/product/{productId}")
-	public void deleteProductById(@PathVariable int productId) {
+	public void deleteProductById(@PathVariable (value="productId") int productId) {
 		// TODO Auto-generated method stub
 		productCrudService.deleteProductById(productId);
 	}

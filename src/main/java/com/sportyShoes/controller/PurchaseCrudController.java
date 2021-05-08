@@ -33,13 +33,13 @@ public class PurchaseCrudController {
 	}
 
 	@GetMapping("/purchase/{purchaseId}")
-	public Purchase getPurchaseById(@PathVariable int purchaseId) {
+	public Purchase getPurchaseById(@PathVariable (value="purchaseId") int purchaseId) {
 		// TODO Auto-generated method stub
 		return purchaseCrudService.getPurchaseById(purchaseId);
 	}
 
 	@DeleteMapping("/purchase/{purchaseId}")
-	public void deletePurchaseById(@PathVariable int purchaseId) {
+	public void deletePurchaseById(@PathVariable (value="purchaseId") int purchaseId) {
 		// TODO Auto-generated method stub
 		purchaseCrudService.deletePurchaseById(purchaseId);
 	}
