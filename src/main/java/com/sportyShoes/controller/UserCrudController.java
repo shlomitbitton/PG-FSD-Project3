@@ -19,6 +19,7 @@ import com.sportyShoes.service.UserCrudService;
 
 
 
+
 //@Api(value="usercrud")
 @RestController
 public class UserCrudController {
@@ -28,25 +29,70 @@ public class UserCrudController {
 	
 	@PostMapping("/createUser")
 	public User createUser(@RequestBody User user) {
-		return userCrudService.createUser(user);
+		List<User> userList=userCrudService.userList();
+		if(!userList.isEmpty()) {
+			for(User usern:userList) {
+				if(!usern.getUserName().equals(user.getUserName())){
+					return userCrudService.createUser(user);
+				}
+			}
+		}else {
+			return userCrudService.createUser(user);
+		}
+		return null;
 	}
 	
 
 	@PutMapping("/user")
-	public User updateUser(@RequestBody User user) {
-		return userCrudService.updateUser(user);
+	public User updateUser( @RequestBody User user) {
+		List<User> userList=userCrudService.userList();
+		if(!userList.isEmpty()) {
+			for(User usern:userList) {
+				if(!usern.getUserName().equals(user.getUserName())){
+					return userCrudService.updateUser(user);
+				}
+			}
+		}
+		else {
+			return userCrudService.createUser(user);
+		}
+		//return a message
+		return null;
 	}
 
 	@GetMapping("/user/{userId}")
 	public User getUserById(@PathVariable (value="userId") int userId) {
 		return userCrudService.getUserById(userId);
 	}
+	
+
+	
+	public User getUserByUserName(String userName) {
+		User user=null;
+		for(User i :userCrudService.userList()){
+			if(i.getUserName().equals(userName)){
+				user=i;
+			}
+		}
+			return user;
+	}
 
 	@DeleteMapping("/user/{userId}")
 	public void deleteUserById(@PathVariable int userId) {
 		userCrudService.deleteUserById(userId);
 	}
-
+	
+	//password change for an admin
+	@PutMapping("/passwordChange")
+	public void updateUserPassword(@RequestBody User user) {
+		//Later: check in session who is the user
+		if(getUserByUserName(user.getUserName())!=null){
+			User currentUser =getUserByUserName(user.getUserName());
+			if(currentUser.getIsAdmin()) {
+				userCrudService.updateUser(currentUser);
+			}
+		}
+	}
 	
 //	@GetMapping(value = "/login/{userName}/{password}")
 //	public boolean isExistingUser(@PathVariable (value="username") String userName, @PathVariable (value="password") String password) {

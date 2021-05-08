@@ -32,6 +32,7 @@ public class UserCrudServiceImpl implements UserCrudService{
 		return userRepository.findById(id).get();
 	}
 
+
 	@Override
 	public void deleteUserById(int id) {
 		userRepository.deleteById(id);
@@ -41,5 +42,6 @@ public class UserCrudServiceImpl implements UserCrudService{
 	public List<User> userList() {
 		return userRepository.findAll();
 	}
+
 
 }
