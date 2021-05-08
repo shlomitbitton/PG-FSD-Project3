@@ -20,27 +20,23 @@ public class PurchaseCrudController {
 	@Autowired
 	private PurchaseCrudService purchaseCrudService;
 	
-	@PostMapping("/purchase")
+	@PostMapping("/createPurchase")
 	public Purchase createPurchase(@RequestBody Purchase purchase) {
-		// TODO Auto-generated method stub
 		return purchaseCrudService.createPurchase(purchase);
 	}
 
 	@PutMapping("/purchase")
 	public Purchase updatePurchase(@RequestBody Purchase purchase) {
-		// TODO Auto-generated method stub
 		return purchaseCrudService.updatePurchase(purchase);
 	}
 
 	@GetMapping("/purchase/{purchaseId}")
 	public Purchase getPurchaseById(@PathVariable (value="purchaseId") int purchaseId) {
-		// TODO Auto-generated method stub
 		return purchaseCrudService.getPurchaseById(purchaseId);
 	}
 
 	@DeleteMapping("/purchase/{purchaseId}")
 	public void deletePurchaseById(@PathVariable (value="purchaseId") int purchaseId) {
-		// TODO Auto-generated method stub
 		purchaseCrudService.deletePurchaseById(purchaseId);
 	}
 

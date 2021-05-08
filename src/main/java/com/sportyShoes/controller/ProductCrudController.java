@@ -23,28 +23,23 @@ public class ProductCrudController {
 	@Autowired
 	private ProductCrudService productCrudService;
 	
-	@PostMapping("/product")
+	@PostMapping("/createProduct")
 	public Product createProduct(@RequestBody Product product) {
-		// TODO Auto-generated method stub
 		return productCrudService.createProduct(product);
-//		return "Hello from Post";
 	}
 
 	@PutMapping("/product")
 	public Product updateProduct(@RequestBody Product product) {
-		// TODO Auto-generated method stub
 		return productCrudService.updateProduct(product);
 	}
 
 	@GetMapping("/product/{productId}")
 	public Product getProductById(@PathVariable (value="productId") int productId) {
-		// TODO Auto-generated method stub
 		return productCrudService.getProductById(productId);
 	}
 
 	@DeleteMapping("/product/{productId}")
 	public void deleteProductById(@PathVariable (value="productId") int productId) {
-		// TODO Auto-generated method stub
 		productCrudService.deleteProductById(productId);
 	}
 

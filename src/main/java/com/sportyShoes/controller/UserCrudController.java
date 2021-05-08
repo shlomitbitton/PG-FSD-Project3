@@ -27,9 +27,10 @@ public class UserCrudController {
 	private UserCrudService userCrudService;
 	
 	@PostMapping("/createUser")
-	public ResponseEntity createUser(@RequestBody User user) {
-		return new ResponseEntity(userCrudService.createUser(user), HttpStatus.OK);
+	public User createUser(@RequestBody User user) {
+		return userCrudService.createUser(user);
 	}
+	
 
 	@PutMapping("/user")
 	public User updateUser(@RequestBody User user) {
@@ -45,10 +46,7 @@ public class UserCrudController {
 	public void deleteUserById(@PathVariable int userId) {
 		userCrudService.deleteUserById(userId);
 	}
-	@GetMapping("/userList")
-	public ResponseEntity userList() {
-		return new ResponseEntity(userCrudService.userList(), HttpStatus.OK);
-	}
+
 	
 //	@GetMapping(value = "/login/{userName}/{password}")
 //	public boolean isExistingUser(@PathVariable (value="username") String userName, @PathVariable (value="password") String password) {

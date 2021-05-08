@@ -12,7 +12,7 @@ import com.sportyShoes.service.UserCrudService;
 @Service
 public class UserCrudServiceImpl implements UserCrudService{
 	
-	
+	 
 	@Autowired
 	private UserRepository userRepository;
 	
