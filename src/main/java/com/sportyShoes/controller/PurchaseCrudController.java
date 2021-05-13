@@ -1,6 +1,9 @@
 package com.sportyShoes.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import com.sportyShoes.model.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sportyShoes.model.Purchase;
 import com.sportyShoes.service.PurchaseCrudService;
+import com.sportyShoes.service.UserCrudService;
 
 
 //@Api(value="purchasecrud")
@@ -20,8 +24,18 @@ public class PurchaseCrudController {
 	@Autowired
 	private PurchaseCrudService purchaseCrudService;
 	
+//	@Autowired
+//	private UserCrudService userCrudService;
+	
 	@PostMapping("/createPurchase")
 	public Purchase createPurchase(@RequestBody Purchase purchase) {
+//		List<User> userList=userCrudService.userList();
+//		for(User u: userList) {
+//			if(u.getUserId()==purchase.getUser().getUserId()){
+//				
+//			}
+//		}
+				
 		return purchaseCrudService.createPurchase(purchase);
 	}
 

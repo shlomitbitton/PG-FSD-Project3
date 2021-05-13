@@ -3,15 +3,13 @@ package com.sportyShoes.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session.Cookie;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sportyShoes.model.User;
@@ -28,36 +26,32 @@ public class UserCrudController {
 	private UserCrudService userCrudService;
 	
 	@PostMapping("/createUser")
-	public User createUser(@RequestBody User user) {
+	public void createUser(@RequestBody User user) {
 		List<User> userList=userCrudService.userList();
-		if(!userList.isEmpty()) {
+		if(userList.isEmpty()) {
+			userCrudService.createUser(user);
+		}else {
 			for(User usern:userList) {
 				if(!usern.getUserName().equals(user.getUserName())){
-					return userCrudService.createUser(user);
+					 userCrudService.createUser(user);
 				}
 			}
-		}else {
-			return userCrudService.createUser(user);
 		}
-		return null;
 	}
 	
 
 	@PutMapping("/user")
-	public User updateUser( @RequestBody User user) {
+	public void updateUser( @RequestBody User user) {
 		List<User> userList=userCrudService.userList();
-		if(!userList.isEmpty()) {
+		if(userList.isEmpty()) {
+			userCrudService.updateUser(user);
+		}else {
 			for(User usern:userList) {
 				if(!usern.getUserName().equals(user.getUserName())){
-					return userCrudService.updateUser(user);
+					userCrudService.updateUser(user);
 				}
 			}
 		}
-		else {
-			return userCrudService.createUser(user);
-		}
-		//return a message
-		return null;
 	}
 
 	@GetMapping("/user/{userId}")
@@ -94,17 +88,23 @@ public class UserCrudController {
 		}
 	}
 	
-//	@GetMapping(value = "/login/{userName}/{password}")
-//	public boolean isExistingUser(@PathVariable (value="username") String userName, @PathVariable (value="password") String password) {
-//		for(User user :userList()) {
-//			if(userName.equals(user.getUserName())) {
-//				if(user.getPassword().equals(password)){
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
+	@PostMapping("/login")
+	public String isExistingUser(@RequestParam("userName") String userName, @RequestParam("password") String password) {
+		String loginMessage="";
+		List<User> userList=userCrudService.userList();
+		for(User user :userList) {
+			if(userName.equals(user.getUserName())) {
+				if(user.getPassword().equals(password)){
+					loginMessage="Login Successfuly!";
+					
+					break;
+				}
+			}
+			loginMessage="Username doesnt exist";
+			break;
+		}
+		return loginMessage;
+	}
 	
 
 

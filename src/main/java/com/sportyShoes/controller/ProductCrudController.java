@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sportyShoes.model.Product;
 import com.sportyShoes.service.ProductCrudService;
+import com.sportyShoes.service.UserCrudService;
 
 
 
@@ -22,6 +23,7 @@ public class ProductCrudController {
 	
 	@Autowired
 	private ProductCrudService productCrudService;
+
 	
 	@PostMapping("/createProduct")
 	public Product createProduct(@RequestBody Product product) {
