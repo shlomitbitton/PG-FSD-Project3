@@ -1,0 +1,1 @@
+insert into purchase (PURCHASE_ID, PURCHASE_DATE,  USER_USER_ID) values(1, '2021-05-08',1);
